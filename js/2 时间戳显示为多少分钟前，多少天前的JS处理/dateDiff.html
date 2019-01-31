@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DateDiff</title>
+</head>
+<body>
+    <script>
+        let DateDiff = (timestamp) => {
+            //对时间戳进行填充到13位，在只传入到秒的情况
+            let strTimeStamp = timestamp + '';
+            //padEnd方法是es6字符串的扩充方法，用于在字符串
+            //末尾进行填充指定的字符，直到字符串的长度达到传入值（13）
+            let fillNumTimeStamp = strTimeStamp.padEnd(13,'0') * 1
+
+            //各个时间对毫秒的换算
+            let minutes2ms = 1000 * 60;
+            let hours2ms = minutes2ms * 60;
+            let day2ms = hours2ms * 24;
+            let halfMonth = day2ms * 15;
+            let month2ms = day2ms * 30;
+
+            let now = new Date().getTime();
+
+            let diffValue = now - fillNumTimeStamp;
+            //计算现在的时间与
+            let diffMinutes = diffValue / minutes2ms;
+            let diffHours = diffValue / hours2ms;
+            let diffDays = diffValue / day2ms;
+            let diffMonth = diffValue / month2ms;
+
+            //补0
+            let zero = (v) => {
+                if(v < 10){
+                    return '0' + v
+                }
+                return v;
+            }
+
+            if(diffMonth > 12){
+                let date = new Date(fillNumTimeStamp);
+                return `${date.getFullYear()}:${date.getMinutes()}:${date.getSeconds()}`
+            }else if(diffMonth >= 1){
+                return `${parseInt(diffMonth)}月前`;
+            }else if(diffDays >= 1){
+                return `${parseInt(diffDays)}天前`;
+            }else if(diffHours >= 1){
+                return `${parseInt(diffHours)}小时前`;
+            }else if(diffMinutes >= 1){
+                return `${parseInt(diffMinutes)}分钟前`
+            }
+            return `刚刚`
+            
+
+            
+        }   
+        console.log(DateDiff(1548921600));
+    </script>
+</body>
+</html>

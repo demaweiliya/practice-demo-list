@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let dateFormat = (timestamp, format = 'Y:m:d') => {
+            /*
+            * 1. Y-m-d
+            * 2. Y-m-d H:i:s
+            * 3. Y年m月d日
+            * 4. Y年m月d日 H时i分
+            */
+            let zero = (value) => {
+                if(value < 10){
+                    return '0' + value;
+                }
+                return value;
+            }
+            let dateHandle = timestamp ? new Date(timestamp) : new Date();
+
+            let year = dateHandle.getFullYear();
+
+            let month = zero(dateHandle.getMonth() + 1);
+
+            let day = zero(dateHandle.getDate());
+
+            let hour = zero(dateHandle.getHours());
+
+            let minutes = zero(dateHandle.getMinutes());
+
+            let seconds = zero(dateHandle.getSeconds());
+
+            return format.replace(/Y|m|d|H|i|s/ig,function(matches){
+                return ({
+                    Y:year,
+                    m:month,
+                    d:day,
+                    H:hour,
+                    i:minutes,
+                    s:seconds
+                })[matches]
+            })
+        }
+
+
+
+        console.log(dateFormat())
+    </script>
+</body>
+</html>
