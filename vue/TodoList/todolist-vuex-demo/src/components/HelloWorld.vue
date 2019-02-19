@@ -26,6 +26,7 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <button @click="showalert">show alert</button>
   </div>
 </template>
 
@@ -34,6 +35,14 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  methods:{
+    showalert(){
+      this.$Alert.info({
+        duration:3,
+        content:'hello world!'
+      })
+    }
   }
 }
 </script>
