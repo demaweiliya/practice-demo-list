@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box wraper container">
+        <ul id="list">
+
+        </ul>
+    </div>
+    <script>
+
+
+        setTimeout(() => {
+            let dataLength = 200000;
+            let pageSize = 20;
+            let number = dataLength / pageSize;
+            let count = 0;
+            function add() {
+                let fragment = document.createDocumentFragment();
+
+                let list = document.getElementById('list');
+
+                for(let i = 0;i < pageSize;i++){
+                    let li = document.createElement('li');
+                    li.innerText = Math.floor(Math.random() * dataLength);
+                    fragment.appendChild(li)
+                }
+
+                list.appendChild(fragment);
+                count++;
+                loop();
+            }
+            function loop(){
+                if(count < number){
+                window.requestAnimationFrame(add);
+                }
+            }
+            
+            loop();
+        }, 0);
+
+
+
+
+    </script>
+</body>
+
+</html>
