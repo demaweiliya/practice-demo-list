@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>call apply bind</title>
+</head>
+<body>
+    <script>
+    Function.prototype.weiCall = (context) => {
+        let context = context || window;
+        //将需要修改上下文的函数挂载到上下文对象上
+        context.fn = this;
+
+        let params = [...arguments].slice(1);
+
+        let result = context.fn(...params);
+
+        delete context.fn;
+
+        return result;
+    }
+
+    
+    </script>
+</body>
+</html>
