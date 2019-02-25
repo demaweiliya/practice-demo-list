@@ -1,6 +1,6 @@
 import Alert from './Alert.vue'
 import Vue from 'vue'
-
+let AlertConstructor = Vue.extend(Alert);
 Alert.newInstance = (properties) => {
     const props = properties || {};
 
@@ -13,10 +13,14 @@ Alert.newInstance = (properties) => {
         }
     })
 
+    // const Instance = new AbortController({
+    //     data:props
+    // })
+
     const component = Instance.$mount();
-
+    //Instance.vm = Instance.$mount();
     document.body.appendChild(component.$el);
-
+    //document.body.appendChild(Instance.vm.$el);
     const alert = Instance.$children[0];
 
     return {
