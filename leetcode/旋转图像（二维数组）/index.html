@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let matrix = [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9]
+        ]
+
+        let result = [
+            [7, 4, 1],
+            [8, 5, 2],
+            [9, 6, 3]
+        ]
+
+        //旋转图像
+        //进行90度的旋转，规律，先进行上下交换，然后进行对角线交换
+        function rotateMatrix(matrix) {
+            let vector = matrix.length;
+
+            for (let i = 0, temp; i < vector / 2; i++) {
+                for (let j = 0; j < vector; j++) {
+                    temp = matrix[i][j];
+                    matrix[i][j] = matrix[vector - 1 - i][j];
+                    matrix[vector - 1 - i][j] = temp;
+                }
+            }
+
+            for (let i = 0, temp; i < vector; i++) {
+                for (let j = 0; j < i; j++) {
+                    temp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = temp;
+                }
+            }
+            return matrix;
+        }
+
+        console.log(rotateMatrix(matrix));
+    </script>
+</body>
+
+</html>
