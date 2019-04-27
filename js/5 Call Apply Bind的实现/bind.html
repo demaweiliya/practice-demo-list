@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //1.返回一个新函数
+        //2.可以传入参数
+
+
+        //第一版 实现传入this的绑定
+        Function.prototype.bind2 = function (ctx) {
+            let self = this;
+
+            let prevParams = Array.prototype.slice.call(arguments, 1);
+
+            return function () {
+                let nextParams = Array.prototype.slice.call(arguments)
+
+                return self.apply(ctx, prevParams.concat(nextParams));
+
+            }
+        }
+
+        let james = {
+            salary:20000
+        }
+
+        function getInfo(){
+            console.log(this.salary);
+            
+        }
+        let printSalary = getInfo.bind2(james);
+        printSalary();
+    </script>
+</body>
+
+</html>
